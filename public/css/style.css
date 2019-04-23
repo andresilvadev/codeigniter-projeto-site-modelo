@@ -765,3 +765,8 @@ and (max-width : 480px) {
     font-size: 20px;
 }
 }
+
+/* Customizações */
+.box-login {
+	padding-top: 100px;
+}

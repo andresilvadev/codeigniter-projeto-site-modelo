@@ -25,3 +25,26 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table .`curses`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `codeigniter_projeto_site_modelo`.`courses` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `image` VARCHAR(100) NULL,
+  `duration` DECIMAL(3,1) NOT NULL,
+  `description` TEXT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table .`team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS  `codeigniter_projeto_site_modelo`.`team` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `photo` VARCHAR(100) NULL,
+  `description` TEXT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;

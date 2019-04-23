@@ -63,7 +63,7 @@ p {
 }
 
 a:hover, a:focus, a:active, a.active {
-    color: #fec503;
+    color: #218e5e;
 }
 a, a:hover, a:focus, a:active, a.active {
     outline: 0;
@@ -71,7 +71,7 @@ a, a:hover, a:focus, a:active, a.active {
 
 ::selection {
     text-shadow: none;
-    background: #fed136;
+    background: #218e5e;
 }
 
 @media (min-width: 768px) {
@@ -98,14 +98,14 @@ section {
     padding: 0px;
 }
 .navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:active,.navbar-default .navbar-brand.active {
-	color: #fec503
+	color: #218e5e
 }
 .navbar-default .navbar-collapse {
 	border-color: rgba(255,255,255,.02)
 }
 .navbar-default .navbar-toggle {
-	background-color: #fed136;
-	border-color: #fed136
+	background-color: #218e5e;
+	border-color: #218e5e
 }
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #fff
@@ -121,18 +121,18 @@ section {
 	color:#fff
 }
 .navbar-default .nav li a:hover,.navbar-default .nav li a:focus {
-	color: #fed136;
+	color: #218e5e;
 	outline: 0
 }
 
 .navbar-default .navbar-nav>.active>a {
 	border-radius: 0;
 	color: #fff;
-	background-color: #fed136
+	background-color: #218e5e
 }
 .navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.active>a:focus {
 	color: #fff;
-	background-color: #fec503
+	background-color: #218e5e
 }
 
 @media (min-width:768px) {
@@ -621,7 +621,7 @@ footer p a {
 }
 
 footer p a span {
-    color: #FF9F46;
+    color: #218e5e;
     font-size: 10px;
     letter-spacing: 1px;
     font-weight: 700;
@@ -661,7 +661,7 @@ font-size: 11px;
 }
 
 .modal-works span {
-	background-color: #FED136;
+	background-color: #218e5e;
     margin-right: 15px;
     padding: 5px 10px;
 }
@@ -672,14 +672,14 @@ font-size: 11px;
 
 .btn-xl:hover, .btn-xl:focus, .btn-xl:active, .btn-xl.active, .open .dropdown-toggle.btn-xl {
     color: #fff;
-    background-color: #fec503;
-    border-color: #f6bf01;
+    background-color: #218e5e;
+    border-color: #218e29;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .open .dropdown-toggle.btn {
     color: #fff;
-    background-color: #fec503;
-    border-color: #f6bf01;
+    background-color: #218e5e;
+    border-color: #218e29;
 }
 
 .btn {
@@ -740,7 +740,7 @@ font-size: 11px;
     transition: 1s;
 }
 #back-top a:hover {
-    background: #fed136;
+    background: #218e5e;
 }
 /* arrow icon (span tag) */
 #back-top i {

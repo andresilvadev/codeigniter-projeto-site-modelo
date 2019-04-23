@@ -7,7 +7,7 @@
 						<div class="section-title">
 							<h2>LOGIN</h2>
 						</div>
-						<form id="login_form" method="post">
+						<form id="login_form" method="post" action="<?=base_url()?>restrict/ajax_login">
 
 							<div class="form-group">
 								<div class="input-group">

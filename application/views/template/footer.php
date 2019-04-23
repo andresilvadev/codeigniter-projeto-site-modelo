@@ -1,6 +1,6 @@
 <footer>
 	<div class="container text-center">
-		<p>Designed by <a href="<?php echo base_url('http://moozthemes.com') ?> "><span>MOOZ</span>Themes.com</a></p>
+		<p>Desenvolvido por <a href="<?php echo base_url('http://andresilvadev.com') ?> "><span>andresilvadev</span></a></p>
 	</div>
 </footer>
 

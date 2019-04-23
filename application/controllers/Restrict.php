@@ -12,27 +12,40 @@ class Restrict extends CI_Controller
 	}
 
 
+	/**
+	 * Se existir sessão direciona para area restrica
+	 * senão para o formulário de login
+	 */
 	public function index()
 	{
-//		echo password_hash("secret", PASSWORD_DEFAULT);
-//		$2y$10$gs.qemVIg7bFjYIG72xt5efbXyRf1XQBFFRZo4ecUxYNV.lsky7Eu
+		if ($this->session->userdata("user_id")) {
+			$this->template->show("restrict.php");
+		} else {
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("login", $data);
+		}
 
-//		$this->load->model('users_model');
-//		$user = $this->users_model->get_user_data("andre");
-//		print_r($user);
+	}
 
-		$data = array(
-			"scripts" => array(
-				"util.js",
-				"login.js"
-			)
-		);
-
-		$this->template->show("login", $data);
+	public function logoff()
+	{
+		$this->session->sess_destroy();
+		header("Location: " . base_url() . "restrict");
 	}
 
 	public function ajax_login()
 	{
+		// Segurança, impede de char esse método na url
+		if(! $this->input->is_ajax_request())
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
 		$json = array();
 		$json["status"] = 1;
 		$json["error_list"] = array();
@@ -68,5 +81,18 @@ class Restrict extends CI_Controller
 
 	}
 
+	public function criaHashPassword($password)
+	{
+		$password = "secret";
+		echo password_hash($password, PASSWORD_DEFAULT); // $2y$10$gs.qemVIg7bFjYIG72xt5efbXyRf1XQBFFRZo4ecUxYNV.lsky7Eu
+	}
+
+	public function consultaUsuarioNoBanco($login)
+	{
+		$login = "andre";
+		$this->load->model('users_model');
+		$user = $this->users_model->get_user_data($login);
+		print_r($user);
+	}
 
 }

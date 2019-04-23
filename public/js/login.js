@@ -12,14 +12,14 @@ $(function() {
 			// Antes de enviar vamos limpar os erros
 			beforeSend: function() {
 				clearErrors();
-				$("#btn_login").parent().siblings("help-block").html(loadingImg("Verificando...")); //Pega o irmao da div form-group que é o span com a class help-block
+				$("#btn_login").parent().siblings(".help-block").html(loadingImg("Verificando...")); //Pega o irmao da div form-group que é o span com a class help-block
 			},
 
 			// Em caso de sucesso
 			success: function(json) {
 				if(json["status"] == 1) {
 					clearErrors();
-					$("#btn_login").parent().siblings("help-block").html(loadingImg("Logando no sistema...")); //Pega o irmao da div form-group que é o span com a class help-block
+					$("#btn_login").parent().siblings(".help-block").html(loadingImg("Logando no sistema...")); //Pega o irmao da div form-group que é o span com a class help-block
 					// Refresh da págna passando a url que queremos
 					window.location = BASE_URL + "restrict";
 				} else {

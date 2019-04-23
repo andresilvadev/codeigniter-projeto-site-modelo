@@ -59,7 +59,7 @@
 
 			<div id="tab_team" class="tab-pane">
 				<div class="container-fluid">
-					<h2 class="text-center"><strong>Gerenciar Equipe</strong></h2>
+					<h2 class="text-center">Gerenciar Equipe</h2>
 
 					<p>
 						<a id="btn_add_member" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Membro</i></a>
@@ -67,7 +67,7 @@
 
 					<table id="dt_team" class="table table-striped table-bordered">
 						<thead>
-						<tr class="tableheader">
+						<tr class="tableheader dark-bg">
 							<th class="dt-center">Nome</th>
 							<th class="dt-center no-sort">Foto</th>
 							<th class="no-sort">Descrição</th>
@@ -82,7 +82,7 @@
 
 			<div id="tab_user" class="tab-pane">
 				<div class="container-fluid">
-					<h2 class="text-center"><strong>Gerenciar Usuários</strong></h2>
+					<h2 class="text-center">Gerenciar Usuários</h2>
 
 					<p>
 						<a id="btn_add_user" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Usuário</i></a>
@@ -90,7 +90,7 @@
 
 					<table id="dt_users" class="table table-striped table-bordered">
 						<thead>
-						<tr class="tableheader">
+						<tr class="tableheader dark-bg">
 							<th>Login</th>
 							<th>Nome</th>
 							<th>E-mail</th>

@@ -20,8 +20,6 @@
 								<span class="help-block"></span>
 							</div>
 
-
-
 							<div class="form-group">
 								<div class="input-group">
 

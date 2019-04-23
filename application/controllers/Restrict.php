@@ -5,6 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Restrict extends CI_Controller
 {
 
+	/**
+	 * Restrict constructor.
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -13,13 +16,21 @@ class Restrict extends CI_Controller
 
 
 	/**
-	 * Se existir sessão direciona para area restrica
+	 * Se existir sessão direciona para area restrita
 	 * senão para o formulário de login
 	 */
 	public function index()
 	{
 		if ($this->session->userdata("user_id")) {
-			$this->template->show("restrict.php");
+			// Carregamento de scripts
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"restrict.js"
+				)
+			);
+			$this->template->show("restrict", $data);
+
 		} else {
 			$data = array(
 				"scripts" => array(
@@ -32,12 +43,18 @@ class Restrict extends CI_Controller
 
 	}
 
+	/**
+	 * Destroi a sessão do usuário
+	 */
 	public function logoff()
 	{
 		$this->session->sess_destroy();
 		header("Location: " . base_url() . "restrict");
 	}
 
+	/**
+	 * Realiza o login do usuário via ajax
+	 */
 	public function ajax_login()
 	{
 		// Segurança, impede de char esse método na url
@@ -81,12 +98,20 @@ class Restrict extends CI_Controller
 
 	}
 
+	/**
+	 * Cria um hash de uma senha
+	 * @param $password
+	 */
 	public function criaHashPassword($password)
 	{
 		$password = "secret";
 		echo password_hash($password, PASSWORD_DEFAULT); // $2y$10$gs.qemVIg7bFjYIG72xt5efbXyRf1XQBFFRZo4ecUxYNV.lsky7Eu
 	}
 
+	/**
+	 * Consulta um usuário no sistema
+	 * @param $login
+	 */
 	public function consultaUsuarioNoBanco($login)
 	{
 		$login = "andre";

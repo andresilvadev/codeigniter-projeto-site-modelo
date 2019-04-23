@@ -153,7 +153,7 @@
 					<div class="form-group">
 						<label class="col-lg-2 control-label">Descrição</label>
 						<div class="col-lg-10">
-							<textarea id="course_description" name="course_description" class="form-control"></textarea>
+							<textarea id="course_description" name="course_description" class="form-control" rows="5"></textarea>
 							<span class="help-block"></span>
 						</div>
 					</div>

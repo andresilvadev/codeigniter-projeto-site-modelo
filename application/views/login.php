@@ -7,15 +7,14 @@
 						<div class="section-title">
 							<h2>LOGIN</h2>
 						</div>
-						<form id="login_form" method="post" action="<?=base_url()?>restrict/ajax_login">
+						<form id="login_form" method="post">
 
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">
 										<span class="glyphicon glyphicon-user"></span>
 									</div>
-									<input type="text" placeholder="Usuário" id="username" name="username"
-										   class="form-control">
+									<input type="text" placeholder="Usuário" id="username" name="username" class="form-control">
 								</div>
 								<span class="help-block"></span>
 							</div>
@@ -27,8 +26,7 @@
 										<span class="glyphicon glyphicon-lock"></span>
 									</div>
 
-									<input type="password" placeholder="Senha" name="password"
-										   class="form-control">
+									<input type="password" placeholder="Senha" name="password" class="form-control">
 								</div>
 							</div>
 

@@ -29,12 +29,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table .`curses`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `codeigniter_projeto_site_modelo`.`courses` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `image` VARCHAR(100) NULL,
-  `duration` DECIMAL(3,1) NOT NULL,
-  `description` TEXT NULL,
+CREATE TABLE IF NOT EXISTS `courses` (
+  `course_id` INT NOT NULL AUTO_INCREMENT,
+  `course_name` VARCHAR(100) NOT NULL,
+  `course_img` VARCHAR(100) NULL,
+  `course_duration` DECIMAL(3,1) NOT NULL,
+  `course_description` TEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,9 +42,9 @@ ENGINE = InnoDB;
 -- Table .`team`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `codeigniter_projeto_site_modelo`.`team` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `photo` VARCHAR(100) NULL,
-  `description` TEXT NULL,
-  PRIMARY KEY (`id`))
+  `member_id` INT NOT NULL AUTO_INCREMENT,
+  `member_name` VARCHAR(100) NOT NULL,
+  `member_photo` VARCHAR(100) NULL,
+  `member_description` TEXT NULL,
+  PRIMARY KEY (`member_id`))
 ENGINE = InnoDB;

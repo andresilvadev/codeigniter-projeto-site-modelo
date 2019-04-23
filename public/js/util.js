@@ -15,6 +15,16 @@ function showErrors(error_list) {
 	});
 }
 
+function showErrorsModal(error_list) {
+	clearErrors();
+
+	$.each(error_list, function(id, message) {
+		//Id sobe dois niveis
+		$(id).parent().parent().addClass("has-error");
+		$(id).siblings(".help-block").html(message); // Irmãos diretos então não usa o parent
+	});
+}
+
 function loadingImg(message="") {
 	return "<i class='fa fa-circle-o-notch fa-spin'></i> &nbsp;" + message
 }

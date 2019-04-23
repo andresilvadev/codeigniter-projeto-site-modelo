@@ -16,7 +16,7 @@ class Courses_model extends CI_Model
 		}
 
 		$this->db->from("courses");
-		$this->db->where("id", $id);
+		$this->db->where("course_id", $id);
 		return $this->db->get();
 	}
 
@@ -27,20 +27,20 @@ class Courses_model extends CI_Model
 
 	public function update($id, $data)
 	{
-		$this->db->where("id", $id);
+		$this->db->where("course_id", $id);
 		$this->db->update("courses", $data);
 	}
 
 	public function delete($id)
 	{
-		$this->db->where("id", $id);
+		$this->db->where("course_id", $id);
 		$this->db->delete("courses", $id);
 	}
 
 	public function is_duplicated($field, $value, $id = null)
 	{
 		if (!empty($id)) {
-			$this->db->where("id <>", $id);
+			$this->db->where("course_id <>", $id);
 		}
 		$this->db->from("courses");
 		$this->db->where($field, $value);

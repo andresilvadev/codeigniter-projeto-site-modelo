@@ -119,12 +119,72 @@ class Restrict extends CI_Controller
 			$json["error"] = $this->upload->display_errors("","");
 		} else {
 			if ($this->upload->data()["file_size"] <= 1024) {
-
 				$file_name =  $this->upload->data()["file_name"];
 				$json["img_path"] = base_url() . "public/upload/" . $file_name;
 			} else {
 				$json["status"] = 0;
 				$json["error"] = "Arquivo não deve ser maior que 1 MB";
+			}
+		}
+
+		echo json_encode($json);
+	}
+
+	public function ajax_save_course()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["error_list"] = array();
+
+		$this->load->model("courses_model");
+
+		$data = $this->input->post();
+
+		if (empty($data["course_name"])) {
+			$json["error_list"]["#course_name"] = "Nome do curso é obrigatório!";
+		} else {
+			if ($this->courses_model->is_duplicated("course_name", $data["course_name"], $data["course_id"])) {
+				$json["error_list"]["#course_name"] = "Nome do curso já existente!";
+			}
+		}
+
+		$data["course_duration"] = floatval($data["course_duration"]); // Transforme em fload a string que vem do formulário
+
+		if (empty($data["course_duration"])) {
+			$json["error_list"]["#course_duration"] = "Duração do curso é obrigatório!";
+		} else {
+			if (!($data["course_duration"] > 0 && $data["course_duration"] < 100)) {
+				$json["error_list"]["#course_duration"] = "O curso deve ser maior que 0 (h) e menor que 100 (h)";
+			}
+		}
+
+		if (!empty($json["error_list"])) {
+			$json["status"] = 0;
+		} else {
+
+			if (!empty($data["course_img"])){
+
+				$file_name = basename($data["course_img"]);
+				$old_path = getcwd() . "/public/upload/" . $file_name ;
+				$new_path = getcwd() . "/public/images/courses/" . $file_name;
+				rename($old_path, $new_path);
+
+				$data["course_img"] = "/public/images/courses/" . $file_name;
+			}
+
+			if(empty($data["course_id"])) {
+				$this->courses_model->insert($data);
+			} else {
+				$course_id = $data["course_id"];
+
+				unset($data["course_id"]); // Remove o course_id do array
+
+				$this->courses_model->update($data);
 			}
 		}
 

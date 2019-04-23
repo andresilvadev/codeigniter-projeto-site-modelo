@@ -2,6 +2,7 @@
 
 class Users_model extends CI_Model
 {
+
 	public function __construct()
 	{
 		parent::__construct(); // Indica que estamos fazendo contrutor da classe Users_model e não da CI_Model
@@ -22,6 +23,6 @@ class Users_model extends CI_Model
 		}else {
 			return null;
 		}
-
 	}
+
 }

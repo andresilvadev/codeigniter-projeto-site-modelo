@@ -9,12 +9,12 @@ class Users_model extends CI_Model
 		$this->load->database(); // Conexão com a base de dados
 	}
 
-	public function get_user_data($login)
+	public function get_user_data($user_login)
 	{
 		$this->db
-			->select("id, password, name, email")
+			->select("user_id, password_hash, user_full_name, user_email")
 			->from("users")
-			->where("login", $login);
+			->where("user_login", $user_login);
 
 		$result = $this->db->get();
 
@@ -32,7 +32,7 @@ class Users_model extends CI_Model
 		}
 
 		$this->db->from("users");
-		$this->db->where("id", $id);
+		$this->db->where("user_id", $id);
 		return $this->db->get();
 	}
 
@@ -43,7 +43,7 @@ class Users_model extends CI_Model
 
 	public function update($id, $data)
 	{
-		$this->db->where("id", $id);
+		$this->db->where("user_id", $id);
 		$this->db->update("users", $data);
 	}
 
@@ -56,7 +56,7 @@ class Users_model extends CI_Model
 	public function is_duplicated($field, $value, $id = null)
 	{
 		if (!empty($id)) {
-			$this->db->where("id <>", $id);
+			$this->db->where("user_id <>", $id);
 		}
 		$this->db->from("users");
 		$this->db->where($field, $value);

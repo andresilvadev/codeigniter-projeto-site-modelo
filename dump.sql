@@ -16,14 +16,14 @@ ENGINE = InnoDB;
 -- Table .`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(250) NOT NULL,
-  `password` VARCHAR(250) NOT NULL,
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `user_login` VARCHAR(45) NOT NULL,
+  `password_hash` VARCHAR(250) NOT NULL,
+  `user_full_name` VARCHAR(100) NOT NULL,
+  `user_email` VARCHAR(250) NOT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------

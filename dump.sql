@@ -41,7 +41,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table .`team`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS  `codeigniter_projeto_site_modelo`.`team` (
+CREATE TABLE IF NOT EXISTS  `team` (
   `member_id` INT NOT NULL AUTO_INCREMENT,
   `member_name` VARCHAR(100) NOT NULL,
   `member_photo` VARCHAR(100) NULL,

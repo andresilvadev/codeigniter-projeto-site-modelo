@@ -193,6 +193,58 @@ class Restrict extends CI_Controller
 	}
 
 
+	public function ajax_save_member()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["error_list"] = array();
+
+		$this->load->model("team_model");
+
+		$data = $this->input->post();
+
+		if (empty($data["member_name"])) {
+			$json["error_list"]["#member_name"] = "Nome do membro é obrigatório!";
+		}
+
+		if (!empty($json["error_list"])) {
+			$json["status"] = 0;
+		} else {
+
+			if (!empty($data["member_photo"])){
+
+				$file_name = basename($data["member_photo"]);
+				$old_path = getcwd() . "/public/upload/" . $file_name ;
+				$new_path = getcwd() . "/public/images/team/" . $file_name;
+				rename($old_path, $new_path);
+
+				$data["member_photo"] = "/public/images/team/" . $file_name;
+
+			} else {
+				unset($data["member_photo"]);
+			}
+
+			// Verifica se está adicionando um novo membro
+			if(empty($data["member_id"])) {
+				$this->team_model->insert($data);
+			} else {
+				$member_id = $data["member_id"];
+
+				unset($data["member_id"]); // Remove o member_id do array
+
+				$this->team_model->update($data);
+			}
+		}
+
+		echo json_encode($json);
+
+	}
+
 	/**
 	 * Cria um hash de uma senha
 	 * @param $password

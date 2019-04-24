@@ -16,7 +16,7 @@ class Team_model extends CI_Model
 		}
 
 		$this->db->from("team");
-		$this->db->where("id", $id);
+		$this->db->where("member_id", $id);
 		return $this->db->get();
 	}
 
@@ -27,13 +27,13 @@ class Team_model extends CI_Model
 
 	public function update($id, $data)
 	{
-		$this->db->where("id", $id);
+		$this->db->where("member_id", $id);
 		$this->db->update("team", $data);
 	}
 
 	public function delete($id)
 	{
-		$this->db->where("id", $id);
+		$this->db->where("member_id", $id);
 		$this->db->delete("team", $id);
 	}
 

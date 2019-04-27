@@ -27,7 +27,8 @@ class Restrict extends CI_Controller
 				"scripts" => array(
 					"util.js",
 					"restrict.js"
-				)
+				),
+				"user_id" => $this->session->userdata("user_id") //Pega o id do usuário na seção logada
 			);
 			$this->template->show("restrict", $data);
 
@@ -316,6 +317,37 @@ class Restrict extends CI_Controller
 				$this->users_model->update($user_id, $data);
 			}
 		}
+
+		echo json_encode($json);
+
+	}
+
+
+	public function ajax_get_user_data()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["input"] = array();
+
+		$this->load->model("users_model");
+
+		$user_id = $this->input->post("user_id");
+
+		$data = $this->users_model->get_data($user_id)->result_array()[0]; // tranforma os dados em um array e pega a posicao zero
+
+		//Cada campo do imput recebe os dados da consulta associado a seu devido campo
+		$json["input"]["user_id"] = $data["user_id"];
+		$json["input"]["user_login"] = $data["user_login"];
+		$json["input"]["user_full_name"] = $data["user_full_name"];
+		$json["input"]["user_email"] = $data["user_email"];
+		$json["input"]["user_email_confirm"] = $data["user_email"];
+		$json["input"]["user_password"] = $data["password_hash"];
+		$json["input"]["user_password_confirm"] = $data["password_hash"];
 
 		echo json_encode($json);
 

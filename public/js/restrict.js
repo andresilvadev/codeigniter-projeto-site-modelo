@@ -101,5 +101,25 @@ $(function() {
 		return false; // Evita que o form seja submetido
 	});
 
+	$("#btn_your_user").click(function () {
+
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "restrict/ajax_get_user_data",
+			dataType: "json",
+			data: {"user_id": $(this).attr("user_id")},
+			success: function(response) {
+				clearErrors();
+				$("#form_member")[0].reset(); // Limpa os campos do formulário
+				$.each(response["input"], function(id, value){
+					$("#"+id).val(value);
+				});
+				$("#modal_user").modal();
+			}
+		});
+
+		return false; // Evita que o form seja submetido
+	});
+
 
 });

@@ -300,7 +300,7 @@ class Restrict extends CI_Controller
 			$json["status"] = 0;
 		} else {
 			// Gera o hash da senha
-			$data["password_hash"] = password_hash($data["user+password"], PASSWORD_DEFAULT);
+			$data["password_hash"] = password_hash($data["user_password"], PASSWORD_DEFAULT);
 
 			// Remove campos para não mandar para o banco
 			unset($data["user_password"]);

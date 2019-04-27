@@ -15,6 +15,8 @@ $(function() {
 	});
 
 	$("#btn_add_user").click(function(){
+		clearErrors();
+		$("#form_member")[0].reset(); // Limpa os campos do formulário
 		$("#modal_user").modal();
 	});
 
@@ -73,5 +75,31 @@ $(function() {
 
 		return false; // Evita que o form seja submetido
 	});
+
+
+	$("#form_user").submit(function () {
+
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "restrict/ajax_save_user",
+			dataType: "json",
+			data: $(this).serialize(),
+			beforeSend: function() {
+				clearErrors();
+				$("#btn_save_user").siblings(".help-block").html(loadingImg("Verificando..."));
+			},
+			success: function(response) {
+				clearErrors();
+				if(response["status"]) {
+					$("#modal_user").modal("hide");
+				} else {
+					showErrorsModal(response["error_list"]);
+				}
+			}
+		});
+
+		return false; // Evita que o form seja submetido
+	});
+
 
 });

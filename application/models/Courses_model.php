@@ -58,13 +58,13 @@ class Courses_model extends CI_Model
 	 * 	$_POST['start'] = Qual posição começar
 	 */
 
-	 $column_search = array("course_name", "course_description");
-	 $column_order = array("course_name", "","course_duration");
+	 var $column_search = array("course_name", "course_description");
+	 var $column_order = array("course_name", "","course_duration");
 
 	 private function _get_datatable()
 	 {
 		$search = null;
-		if(isset($this->input->post("search"))) {
+		if($this->input->post("search")) {
 			$search = $this->input->post("search")["value"];
 		}
 
@@ -81,7 +81,7 @@ class Courses_model extends CI_Model
 		
 		if(isset($search)) {
 			$first = true;			
-			foreach ($this->$column_search as $field) {
+			foreach ($this->column_search as $field) {
 				if($first) {
 					$this->db->group_start();
 					$this->db->like($field, $search);
@@ -96,7 +96,7 @@ class Courses_model extends CI_Model
 		}
 
 		if(isset($order)) {
-			$this->db->order_by($this->$column_order[$order_column], $order_dir);
+			$this->db->order_by($this->column_order[$order_column], $order_dir);
 		}
 	 }
 

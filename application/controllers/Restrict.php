@@ -382,4 +382,56 @@ class Restrict extends CI_Controller
 		print_r($user);
 	}
 
+	public function ajax_list_course()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$this->load->model("courses_model");
+		$courses = $this->courses_model->get_datatable();
+
+		$data = array();
+
+		foreach ($courses as $course) {
+			$row = array();
+
+			$row[] = $course->course_name;
+			
+			if($course->course->img) {
+				$row[] = '<img src="'.base_url().$course->course_img.'" style="max-height: 100px; max-width: 100px;">';				
+			} else {
+				$row[] = "";
+			}
+
+			$row[] = $course->course_duration;
+			$row[] = '<div class="description">' . $course->course_description . '</div>';
+
+			$row[] = '<div style="display: inline-block;>
+						<button class="btn btn-primary btn-edit-course" 
+							course_id="'.$course->course_id.'"
+							<i class="fa fa-edit"></id>
+						</button>
+						<button class="btn btn-danger btn-del-course" 
+							course_id="'.$course->course_id.'"
+							<i class="fa fa-remove"></id>
+						</button>
+					  </div>';
+
+			$data[]	= $row;
+			
+			$json = array(
+				"draw" => $this->input->post("draw"),
+				"recordsTotal" => $this->course_modal->records_total(),
+				"recordsFiltered" => $this->course_modal->records_filtered(),
+				"data" => $data,
+			);
+
+			echo json_encode($json);
+		}
+
+		
+	}
+
 }

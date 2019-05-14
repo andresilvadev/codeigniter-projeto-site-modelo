@@ -481,4 +481,46 @@ class Restrict extends CI_Controller
 		echo json_encode($json);
 	}
 
+	public function ajax_list_user()
+	{
+		
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
+		}
+
+		$this->load->model("users_model");
+		$users = $this->users_model->get_datatable();
+
+		$data = array();
+		foreach ($users as $user) {
+
+			$row = array();
+			$row[] = $user->user_login;
+			$row[] = $user->user_full_name;
+			$row[] = $user->user_email;
+
+			$row[] = '<div style="display: inline-block;">
+						<button class="btn btn-primary btn-edit-user" 
+							user_id="'.$user->user_id.'">
+							<i class="fa fa-edit"></i>
+						</button>
+						<button class="btn btn-danger btn-del-user" 
+							user_id="'.$user->user_id.'">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>';
+
+			$data[] = $row;
+		}
+
+		$json = array(
+			"draw" => $this->input->post("draw"),
+			"recordsTotal" => $this->users_model->records_total(),
+			"recordsFiltered" => $this->users_model->records_filtered(),
+			"data" => $data,
+		);
+
+		echo json_encode($json);
+	}
+
 }

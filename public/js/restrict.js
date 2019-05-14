@@ -149,4 +149,18 @@ $(function() {
 		]
 	});
 
+	var dt_users = $("#dt_users").DataTable({
+		"autoWidth": false,
+		"processing": true,
+		"serverSide" : true,
+		"ajax" : {
+			"url" : BASE_URL + "restrict/ajax_list_user",
+			"type": "POST"
+		},
+		"columnDefs": [
+			{ targets: "no-sort", orderable: false },
+			{ targets: "dt-center", className: "dt-center"}
+		]
+	});
+
 });

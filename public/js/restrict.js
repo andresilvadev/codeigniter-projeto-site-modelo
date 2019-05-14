@@ -121,6 +121,26 @@ $(function() {
 		return false; // Evita que o form seja submetido
 	});
 
+	function active_btn_course() {
+		$(".btn-edit-course").click(function(){
+			$.ajax({
+				type: "POST",
+				url: BASE_URL + "restrict/ajax_get_course_data",
+				dataType: "json",
+				data: {"course_id": $(this).attr("course_id")},
+				success: function(response) {
+					clearErrors();
+					$("#form_course")[0].reset(); // Limpa os campos do formulário
+					$.each(response["input"], function(id, value){
+						$("#"+id).val(value);
+					});
+					$("#course_img_path").attr("src", response["img"]["course_img"])
+					$("#modal_course").modal();
+				}
+			});
+		})
+	}
+
 	var dt_course = $("#dt_courses").DataTable({
 		"autoWidth": false,
 		"processing": true,
@@ -132,7 +152,10 @@ $(function() {
 		"columnDefs": [
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
-		]
+		],
+		"initComplete": function() {
+			active_btn_course();
+		}
 	});
 
 	var dt_member = $("#dt_team").DataTable({

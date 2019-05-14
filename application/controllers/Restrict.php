@@ -382,7 +382,7 @@ class Restrict extends CI_Controller
 		$json["input"]["course_duration"] = $data["course_duration"];
 		$json["input"]["course_description"] = $data["course_description"];
 		
-		$json["img"]["course_img"] = $data["course_img"];
+		$json["img"]["course_img"] = base_url().$data["course_img"];
 		
 		echo json_encode($json);
 	}

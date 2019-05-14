@@ -30,8 +30,8 @@ class Restrict extends CI_Controller
 				),
 				"scripts" => array(
 					"sweetalert2.all.min.js",
-					"dataTables.bootstrap.min.js",
 					"datatables.min.js",
+					"dataTables.bootstrap.min.js",
 					"util.js",
 					"restrict.js"
 				),
@@ -82,7 +82,7 @@ class Restrict extends CI_Controller
 			$json["status"] = 0;
 			$json["error_list"]["#username"] = "Usuário não pode ser vazio!";
 		} else {
-			$this->load->model('users_model');
+			$this->load->model('courses_model');
 			$result = $this->users_model->get_user_data($username);
 
 			if($result) {
@@ -384,54 +384,52 @@ class Restrict extends CI_Controller
 
 	public function ajax_list_course()
 	{
-		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
-		{
-			exit("Nenhum acesso de script direto é permitido!");
+		
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
 		}
 
 		$this->load->model("courses_model");
 		$courses = $this->courses_model->get_datatable();
 
 		$data = array();
-
 		foreach ($courses as $course) {
-			$row = array();
 
+			$row = array();
 			$row[] = $course->course_name;
-			
-			if($course->course->img) {
-				$row[] = '<img src="'.base_url().$course->course_img.'" style="max-height: 100px; max-width: 100px;">';				
+
+			if ($course->course_img) {
+				$row[] = '<img src="'.base_url().$course->course_img.'" style="max-height: 100px; max-width: 100px;">';
 			} else {
 				$row[] = "";
 			}
 
 			$row[] = $course->course_duration;
-			$row[] = '<div class="description">' . $course->course_description . '</div>';
+			$row[] = '<div class="description">'.$course->course_description.'</div>';
 
-			$row[] = '<div style="display: inline-block;>
+			$row[] = '<div style="display: inline-block;">
 						<button class="btn btn-primary btn-edit-course" 
-							course_id="'.$course->course_id.'"
-							<i class="fa fa-edit"></id>
+							course_id="'.$course->course_id.'">
+							<i class="fa fa-edit"></i>
 						</button>
 						<button class="btn btn-danger btn-del-course" 
-							course_id="'.$course->course_id.'"
-							<i class="fa fa-remove"></id>
+							course_id="'.$course->course_id.'">
+							<i class="fa fa-times"></i>
 						</button>
-					  </div>';
+					</div>';
 
-			$data[]	= $row;
-			
-			$json = array(
-				"draw" => $this->input->post("draw"),
-				"recordsTotal" => $this->course_modal->records_total(),
-				"recordsFiltered" => $this->course_modal->records_filtered(),
-				"data" => $data,
-			);
+			$data[] = $row;
 
-			echo json_encode($json);
 		}
 
-		
-	}
+		$json = array(
+			"draw" => $this->input->post("draw"),
+			"recordsTotal" => $this->courses_model->records_total(),
+			"recordsFiltered" => $this->courses_model->records_filtered(),
+			"data" => $data,
+		);
+
+		echo json_encode($json);
+	}	
 
 }

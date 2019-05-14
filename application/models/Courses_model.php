@@ -9,6 +9,11 @@ class Courses_model extends CI_Model
 		$this->load->database(); // Conexão com a base de dados
 	}
 
+	public function show_courses() {
+		$this->db->from("courses");
+		return $this->db->get()->result_array();
+	}
+
 	public function get_data($id, $select = null)
 	{
 		if(!empty($select)) {
@@ -58,74 +63,70 @@ class Courses_model extends CI_Model
 	 * 	$_POST['start'] = Qual posição começar
 	 */
 
-	 var $column_search = array("course_name", "course_description");
-	 var $column_order = array("course_name", "","course_duration");
+	var $column_search = array("course_name", "course_description");
+	var $column_order = array("course_name", "", "course_duration");
 
-	 private function _get_datatable()
-	 {
-		$search = null;
-		if($this->input->post("search")) {
+	private function _get_datatable() 
+	{
+		$search = NULL;
+		if ($this->input->post("search")) {
 			$search = $this->input->post("search")["value"];
 		}
-
-		$order_column =  null;
-		$order_dir =  null;
-
+		$order_column = NULL;
+		$order_dir = NULL;
 		$order = $this->input->post("order");
-		if(isset($order)) {
-			$order_column = $order["0"]["column"];
-			$order_dir = $order["0"]["dir"];
+		if (isset($order)) {
+			$order_column = $order[0]["column"];
+			$order_dir = $order[0]["dir"];
 		}
 
 		$this->db->from("courses");
-		
-		if(isset($search)) {
-			$first = true;			
+		if (isset($search)) {
+			$first = TRUE;
 			foreach ($this->column_search as $field) {
-				if($first) {
+				if ($first) {
 					$this->db->group_start();
 					$this->db->like($field, $search);
-					$fisrt = false;
+					$first = FALSE;
 				} else {
 					$this->db->or_like($field, $search);
 				}
-				if (!$first) {
-					$this->db->group_end();
-				}
+			}
+			if (!$first) {
+				$this->db->group_end();
 			}
 		}
 
-		if(isset($order)) {
+		if (isset($order)) {
 			$this->db->order_by($this->column_order[$order_column], $order_dir);
 		}
-	 }
+	}
 
-	 public function get_datatable()
-	 {
-		 $length = $this->input->post("length");
-		 $start = $this->input->post("start");
-		 $this->get_datatable();
+	public function get_datatable() 
+	{
+		$length = $this->input->post("length");
+		$start = $this->input->post("start");
+		$this->_get_datatable();
 
-		 // Se estiver setado e for diferente de -1
+		// Se estiver setado e for diferente de -1
 		 // -1 indica que é todos os campos
-		 if(isset($length) && $length != -1) {
+		if (isset($length) && $length != -1) {
 			$this->db->limit($length, $start);
-		 }
+		}
+		return $this->db->get()->result();
+	}
 
-		 return $this->db->get()->result();
-	 }
-
-	 public function records_filtered()
-	 {
-		$this->get_datatable();
+	public function records_filtered() 
+	{
+		$this->_get_datatable();
 		return $this->db->get()->num_rows(); // Retorna o número de linhas
-	 }
+	}
 
-	 public function records_total()
-	 {
+	public function records_total() 
+	{
 		$this->db->from("courses");
 		return $this->db->count_all_results(); // Retorna o número de linhas
-	 }
+	}
 
 }
 

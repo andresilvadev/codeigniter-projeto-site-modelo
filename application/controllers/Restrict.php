@@ -357,7 +357,34 @@ class Restrict extends CI_Controller
 		$json["input"]["user_password_confirm"] = $data["password_hash"];
 
 		echo json_encode($json);
+	}
 
+	public function ajax_get_course_data()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["input"] = array();
+
+		$this->load->model("courses_model");
+
+		$course_id = $this->input->post("course_id");
+
+		$data = $this->courses_model->get_data($course_id)->result_array()[0]; // tranforma os dados em um array e pega a posicao zero
+
+		//Cada campo do imput recebe os dados da consulta associado a seu devido campo
+		$json["input"]["course_id"] = $data["course_id"];
+		$json["input"]["course_name"] = $data["course_name"];
+		$json["input"]["course_duration"] = $data["course_duration"];
+		$json["input"]["course_description"] = $data["course_description"];
+		
+		$json["img"]["course_img"] = $data["course_img"];
+		
+		echo json_encode($json);
 	}
 
 	/**

@@ -134,13 +134,13 @@ $(function() {
 					$.each(response["input"], function(id, value){
 						$("#"+id).val(value);
 					});
-					$("#course_img_path").attr("src", response["img"]["course_img"])
+					$("#course_img_path").attr("src", response["img"]["course_img_path"]);
 					$("#modal_course").modal();
 				}
 			});
 		})
 	}
-
+	
 	var dt_course = $("#dt_courses").DataTable({
 		"autoWidth": false,
 		"processing": true,
@@ -158,6 +158,26 @@ $(function() {
 		}
 	});
 
+	function active_btn_member() {
+		$(".btn-edit-member").click(function(){
+			$.ajax({
+				type: "POST",
+				url: BASE_URL + "restrict/ajax_get_member_data",
+				dataType: "json",
+				data: {"member_id": $(this).attr("member_id")},
+				success: function(response) {
+					clearErrors();
+					$("#form_member")[0].reset(); // Limpa os campos do formulário
+					$.each(response["input"], function(id, value){
+						$("#"+id).val(value);
+					});
+					$("#member_photo_path").attr("src", response["img"]["member_photo_path"]);
+					$("#modal_member").modal();
+				}
+			});
+		})
+	}
+
 	var dt_member = $("#dt_team").DataTable({
 		"autoWidth": false,
 		"processing": true,
@@ -169,7 +189,10 @@ $(function() {
 		"columnDefs": [
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
-		]
+		],
+		"initComplete": function() {
+			active_btn_member();
+		}
 	});
 
 	var dt_users = $("#dt_users").DataTable({

@@ -82,7 +82,7 @@ class Restrict extends CI_Controller
 			$json["status"] = 0;
 			$json["error_list"]["#username"] = "Usuário não pode ser vazio!";
 		} else {
-			$this->load->model('courses_model');
+			$this->load->model('users_model');
 			$result = $this->users_model->get_user_data($username);
 
 			if($result) {
@@ -382,7 +382,34 @@ class Restrict extends CI_Controller
 		$json["input"]["course_duration"] = $data["course_duration"];
 		$json["input"]["course_description"] = $data["course_description"];
 		
-		$json["img"]["course_img"] = base_url().$data["course_img"];
+		$json["img"]["course_img_path"] = base_url() . $data["course_img"];
+		
+		echo json_encode($json);
+	}
+
+	public function ajax_get_member_data()
+	{
+		if(! $this->input->is_ajax_request()) // Segurança, impede de chamar esse método na url
+		{
+			exit("Nenhum acesso de script direto é permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["input"] = array();
+
+		$this->load->model("team_model");
+
+		$member_id = $this->input->post("member_id");
+
+		$data = $this->team_model->get_data($member_id)->result_array()[0]; // tranforma os dados em um array e pega a posicao zero
+
+		//Cada campo do imput recebe os dados da consulta associado a seu devido campo
+		$json["input"]["member_id"] = $data["member_id"];
+		$json["input"]["member_name"] = $data["member_name"];
+		$json["input"]["member_description"] = $data["member_description"];
+		
+		$json["img"]["member_photo_path"] = base_url() . $data["member_photo"];
 		
 		echo json_encode($json);
 	}

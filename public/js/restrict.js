@@ -153,7 +153,7 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
 		],
-		"initComplete": function() {
+		"initComplete": function() { // Chama a função depois que o datatable for carregado
 			active_btn_course();
 		}
 	});
@@ -190,10 +190,30 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
 		],
-		"initComplete": function() {
+		"initComplete": function() { // Chama a função depois que o datatable for carregado
 			active_btn_member();
 		}
 	});
+
+
+	function active_btn_user() {
+		$(".btn-edit-user").click(function(){
+			$.ajax({
+				type: "POST",
+				url: BASE_URL + "restrict/ajax_get_user_data",
+				dataType: "json",
+				data: {"user_id": $(this).attr("user_id")},
+				success: function(response) {
+					clearErrors();
+					$("#form_user")[0].reset(); // Limpa os campos do formulário
+					$.each(response["input"], function(id, value){
+						$("#"+id).val(value);
+					});					
+					$("#modal_user").modal();
+				}
+			});
+		})
+	}
 
 	var dt_users = $("#dt_users").DataTable({
 		"autoWidth": false,
@@ -206,7 +226,10 @@ $(function() {
 		"columnDefs": [
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
-		]
+		],
+		"initComplete": function() { // Chama a função depois que o datatable for carregado
+			active_btn_user();
+		}
 	});
 
 });

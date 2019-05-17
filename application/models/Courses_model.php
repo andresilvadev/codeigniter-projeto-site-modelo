@@ -39,7 +39,7 @@ class Courses_model extends CI_Model
 	public function delete($id)
 	{
 		$this->db->where("course_id", $id);
-		$this->db->delete("courses", $id);
+		$this->db->delete("courses");
 	}
 
 	public function is_duplicated($field, $value, $id = null)

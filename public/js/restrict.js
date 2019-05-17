@@ -138,7 +138,40 @@ $(function() {
 					$("#modal_course").modal();
 				}
 			});
-		})
+		});
+
+		$(".btn-del-course").click(function(){
+			course_id = $(this);
+
+			console.log(course_id.attr("course_id"));
+			
+			// Chama o sweet alert
+			Swal.fire({
+				title: "Atenção!",
+				text: "Deseja deletar esse curso?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d9534f",
+				confirmButtonText: "Sim",
+				cancelButtontext: "Não",
+				closeOnConfirm: true,
+				closeOnCancel: true,
+			}).then((result) => {
+				if(result.value) {
+					$.ajax({
+						type: "POST",
+						url: BASE_URL + "restrict/ajax_delete_course_data",
+						dataType: "json",
+						data: {"course_id": course_id.attr("course_id")},
+						success: function(response) {
+							Swal.fire("Sucesso!", "Ação executada com sucesso", "success");
+							dt_course.ajax.reload();
+						}
+					})
+				}
+			});
+			
+		});
 	}
 	
 	var dt_course = $("#dt_courses").DataTable({

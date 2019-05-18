@@ -16,7 +16,7 @@ $(function() {
 
 	$("#btn_add_user").click(function(){
 		clearErrors();
-		$("#form_member")[0].reset(); // Limpa os campos do formulário
+		$("#form_user")[0].reset(); // Limpa os campos do formulário
 		$("#modal_user").modal();
 	});
 

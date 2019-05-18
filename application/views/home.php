@@ -132,12 +132,14 @@
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-md-offset-3 col-md-3 mb-sm-30">
-				<div class="counter-item">					
+				<div class="counter-item">		
+					<h2><?= $total_courses ?></h2>			
 					<a href="#portfolio" class="page-scroll"><h6>Curso</h6></a>
 				</div>
 			</div>			
 			<div class="col-md-3 mb-sm-30">
-				<div class="counter-item">					
+				<div class="counter-item">		
+					<h2><?= $total_members ?></h2>							
 					<a href="#team" class="page-scroll"><h6>Equipe</h6></a>					
 				</div>
 			</div>

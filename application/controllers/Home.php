@@ -9,9 +9,11 @@ class Home extends CI_Controller
 	{
 
 		$this->load->model("courses_model");
-		$courses = $this->courses_model->show_courses();
+		$courses = $this->courses_model->show_courses();		
+		$total_courses = sizeof($courses);
+		
 		// Para cada curso da lista se não houver imagem então adiciona um no-image.jpg
-		for ($i=0; $i < sizeof($courses); $i++) { 
+		for ($i=0; $i < $total_courses; $i++) { 
 			$img = $courses[$i]['course_img'];
 			if(empty($img)) {				
 				$courses[$i]['course_img'] = '/public/images/no-image.jpg';
@@ -19,11 +21,12 @@ class Home extends CI_Controller
 			}
 		}
 		
-
 		$this->load->model("team_model");
 		$team = $this->team_model->show_team();
+		$total_members = sizeof($team);
+
 		// Para cada curso da lista se não houver imagem então adiciona um no-image.jpg
-		for ($i=0; $i < sizeof($team); $i++) { 
+		for ($i=0; $i < $total_members; $i++) { 
 			$img = $team[$i]['member_photo'];
 			if(empty($img)) {				
 				$team[$i]['member_photo'] = '/public/images/no-image.jpg';
@@ -38,7 +41,9 @@ class Home extends CI_Controller
 				"theme-scripts.js",
 			),
 			"courses" => $courses,
-			"team" => $team
+			"team" => $team,
+			"total_courses" => $total_courses,
+			"total_members" => $total_members,			
 		);
 		$this->template->show("home", $data);
 	}

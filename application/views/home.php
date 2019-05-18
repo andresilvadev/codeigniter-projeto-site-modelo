@@ -192,7 +192,8 @@
 					<div class="col-md-4">
 						<div class="ot-portfolio-item">
 							<figure class="effect-bubba">
-								<img src="<?= base_url() . $course["course_img"]?>" alt="img02" class="img-responsive" />
+							
+								<img src="<?= base_url() . $course["course_img"] ?>" alt="img02" class="img-responsive" />
 								<figcaption>
 								
 									<h2><?= $course["course_name"]?></h2>
@@ -282,21 +283,24 @@
 			</div>
 		</div>
 		<div class="row">
-			<!-- team member item -->
-			<div class="col-md-3">
-				<div class="team-item">
-					<div class="team-image">
-						<img src="<?php echo base_url('public/images/demo/author-2.jpg') ?> " class="img-responsive" alt="author">
+		<?php 
+		if (!empty($team)) {
+			foreach ($team as $member) { ?>
+				<!-- team member item -->
+				<div class="col-md-3">
+					<div class="team-item">
+						<div class="team-image">
+							<img src="<?=base_url().$member["member_photo"]?>" class="img-responsive img-circle" alt="author">
+						</div>
+						<div class="team-text">
+							<h3><?=$member["member_name"]?></h3>							
+							<div class="team-position">– <?=$member["member_description"]?> –</div>
+							<p></p>
+						</div>
 					</div>
-					<div class="team-text">
-						<h3>TOM BEKERS</h3>
-						<div class="team-location">Sydney, Australia</div>
-						<div class="team-position">– CEO & Web Design –</div>
-						<p>Mida sit una namet, cons uectetur adipiscing adon elit. Aliquam vitae barasa droma.</p>
-					</div>
-				</div>
-			</div>
-			<!-- end team member item -->			
+				</div>				
+			<?php } // FOREACH
+		} // IF ?>		
 		</div>
 	</div>
 </section>

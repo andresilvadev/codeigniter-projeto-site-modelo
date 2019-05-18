@@ -43,6 +43,8 @@ $(function() {
 				clearErrors();
 				if(response["status"]) {
 					$("#modal_course").modal("hide");
+					Swal.fire("Sucesso!", "Curso salvo com sucesso", "success");
+					dt_course.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"]);
 				}
@@ -67,6 +69,8 @@ $(function() {
 				clearErrors();
 				if(response["status"]) {
 					$("#modal_member").modal("hide");
+					Swal.fire("Sucesso!", "Membro salvo com sucesso", "success");
+					dt_member.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"]);
 				}
@@ -92,6 +96,8 @@ $(function() {
 				clearErrors();
 				if(response["status"]) {
 					$("#modal_user").modal("hide");
+					Swal.fire("Sucesso!", "Usuário salvo com sucesso", "success");
+					dt_user.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"]);
 				}
@@ -165,7 +171,7 @@ $(function() {
 						data: {"course_id": course_id.attr("course_id")},
 						success: function(response) {
 							Swal.fire("Sucesso!", "Ação executada com sucesso", "success");
-							dt_course.ajax.reload();
+							dt_course.ajax.reload();							
 						}
 					})
 				}
@@ -185,7 +191,7 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
 		],
-		"initComplete": function() { // Chama a função depois que o datatable for carregado
+		"drawCallback": function() { // Chama a função tanto na hora de criar quanto atualizar
 			active_btn_course();
 		}
 	});
@@ -254,7 +260,7 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
 		],
-		"initComplete": function() { // Chama a função depois que o datatable for carregado
+		"drawCallback": function() { // Chama a função depois que o datatable for carregado
 			active_btn_member();
 		}
 	});
@@ -323,7 +329,7 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center"}
 		],
-		"initComplete": function() { // Chama a função depois que o datatable for carregado
+		"drawCallback": function() { // Chama a função depois que o datatable for carregado
 			active_btn_user();
 		}
 	});

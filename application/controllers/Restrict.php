@@ -183,16 +183,16 @@ class Restrict extends CI_Controller
 				rename($old_path, $new_path);
 
 				$data["course_img"] = "/public/images/courses/" . $file_name;
+			} else {
+				unset($data["course_img"]); // Caso esteja vazio ele não entra no update no banco
 			}
 
 			if(empty($data["course_id"])) {
 				$this->courses_model->insert($data);
 			} else {
 				$course_id = $data["course_id"];
-
 				unset($data["course_id"]); // Remove o course_id do array
-
-				$this->courses_model->update($data);
+				$this->courses_model->update($course_id, $data);
 			}
 		}
 
@@ -234,7 +234,7 @@ class Restrict extends CI_Controller
 				$data["member_photo"] = "/public/images/team/" . $file_name;
 
 			} else {
-				unset($data["member_photo"]);
+				unset($data["member_photo"]); // Caso esteja vazio ele não entra no update no banco
 			}
 
 			// Verifica se está adicionando um novo membro
@@ -242,15 +242,12 @@ class Restrict extends CI_Controller
 				$this->team_model->insert($data);
 			} else {
 				$member_id = $data["member_id"];
-
 				unset($data["member_id"]); // Remove o member_id do array
-
-				$this->team_model->update($data);
+				$this->team_model->update($member_id, $data);
 			}
 		}
 
 		echo json_encode($json);
-
 	}
 
 

@@ -49,8 +49,8 @@ class Users_model extends CI_Model
 
 	public function delete($id)
 	{
-		$this->db->where("id", $id);
-		$this->db->delete("users", $id);
+		$this->db->where("user_id", $id);
+		$this->db->delete("users");
 	}
 
 	public function is_duplicated($field, $value, $id = null)

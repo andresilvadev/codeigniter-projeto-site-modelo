@@ -276,7 +276,39 @@ $(function() {
 					$("#modal_user").modal();
 				}
 			});
-		})
+		});
+
+		$(".btn-del-user").click(function(){
+			user_id = $(this);
+
+			console.log(user_id.attr("user_id"));
+			
+			// Chama o sweet alert
+			Swal.fire({
+				title: "Atenção!",
+				text: "Deseja deletar esse usuário?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d9534f",
+				confirmButtonText: "Sim",
+				cancelButtontext: "Não",
+				closeOnConfirm: true,
+				closeOnCancel: true,
+			}).then((result) => {
+				if(result.value) {
+					$.ajax({
+						type: "POST",
+						url: BASE_URL + "restrict/ajax_delete_user_data",
+						dataType: "json",
+						data: {"user_id": user_id.attr("user_id")},
+						success: function(response) {
+							Swal.fire("Sucesso!", "Ação executada com sucesso", "success");
+							dt_users.ajax.reload();
+						}
+					})
+				}
+			});			
+		});
 	}
 
 	var dt_users = $("#dt_users").DataTable({

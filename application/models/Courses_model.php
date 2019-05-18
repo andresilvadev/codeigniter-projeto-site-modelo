@@ -11,7 +11,7 @@ class Courses_model extends CI_Model
 
 	public function show_courses() {
 		$this->db->from("courses");
-		return $this->db->get()->result_array();
+		return $this->db->get()->result_array(); // Retorna os dados em formato de array
 	}
 
 	public function get_data($id, $select = null)

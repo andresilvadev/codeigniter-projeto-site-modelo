@@ -131,6 +131,22 @@
 <section class="overlay-dark bg-img1 dark-bg short-section">
 	<div class="container text-center">
 		<div class="row">
+			<div class="col-md-offset-3 col-md-3 mb-sm-30">
+				<div class="counter-item">					
+					<a href="#portfolio" class="page-scroll"><h6>Curso</h6></a>
+				</div>
+			</div>			
+			<div class="col-md-3 mb-sm-30">
+				<div class="counter-item">					
+					<a href="#team" class="page-scroll"><h6>Equipe</h6></a>					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- <section class="overlay-dark bg-img1 dark-bg short-section">
+	<div class="container text-center">
+		<div class="row">
 			<div class="col-md-3 mb-sm-30">
 				<div class="counter-item">
 					<h2 data-count="59">59</h2>
@@ -157,7 +173,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> -->
 <section id="portfolio" class="light-bg">
 	<div class="container">
 		<div class="row">
@@ -170,92 +186,50 @@
 		</div>
 		<div class="row">
 			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-1.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Dean & Letter</h2>
-							<p>Branding, Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-1">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
+			<?php if (!empty($courses)) {
+
+				foreach ($courses as $course) { ?>
+					<div class="col-md-4">
+						<div class="ot-portfolio-item">
+							<figure class="effect-bubba">
+								<img src="<?= base_url() . $course["course_img"]?>" alt="img02" class="img-responsive" />
+								<figcaption>
+								
+									<h2><?= $course["course_name"]?></h2>
+									<p>Branding, Design</p>
+									<a href="#" data-toggle="modal" data-target="#course_<?= $course["course_id"]?>">View more</a>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<!-- Modal for portfolio item 1 -->
+					<div class="modal fade" id="course_<?= $course["course_id"]?>" tabindex="-1" role="dialog" aria-labelledby="Modal-label-1">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="Modal-label-1"><?= $course["course_name"]?></h4>
+								</div>
+								<div class="modal-body">
+									<img src="<?= base_url() . $course["course_img"]?>" alt="img01" class="img-responsive center-block" />
+									<div class="modal-works"><span>Duração: <?= intval($course["course_duration"])?> horas</span></div>
+									<p><?= $course["course_description"]?></p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php 
+				} // FOREACH				
+			} // IF 
+			?>  
 			<!-- end portfolio item -->
-			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-2.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Startup Framework</h2>
-							<p>Branding, Web Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<!-- end portfolio item -->
-			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-3.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Lamp & Velvet</h2>
-							<p>Branding, Web Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-3">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<!-- end portfolio item -->
+			
 		</div>
-		<div class="row">
-			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-4.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Smart Name</h2>
-							<p>Branding, Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-4">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<!-- end portfolio item -->
-			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-5.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Fast People</h2>
-							<p>Branding, Web Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-5">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<!-- end portfolio item -->
-			<!-- start portfolio item -->
-			<div class="col-md-4">
-				<div class="ot-portfolio-item">
-					<figure class="effect-bubba">
-						<img src="<?php echo base_url('public/images/demo/portfolio-2.jpg') ?> " alt="img02" class="img-responsive" />
-						<figcaption>
-							<h2>Kites & Stars</h2>
-							<p>Branding, Web Design</p>
-							<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<!-- end portfolio item -->
-		</div>
+		
 	</div><!-- end container -->
 </section>
 <section>
@@ -322,52 +296,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- end team member item -->
-			<!-- team member item -->
-			<div class="col-md-3">
-				<div class="team-item">
-					<div class="team-image">
-						<img src="<?php echo base_url('public/images/demo/author-6.jpg') ?> " class="img-responsive" alt="author">
-					</div>
-					<div class="team-text">
-						<h3>LINA GOSATA</h3>
-						<div class="team-location">Los Angeles, California</div>
-						<div class="team-position">– Photography –</div>
-						<p>Worsa dona namet, cons uectetur dipiscing adon elit. Aliquam vitae fringilla unda mir.</p>
-					</div>
-				</div>
-			</div>
-			<!-- end team member item -->
-			<!-- team member item -->
-			<div class="col-md-3">
-				<div class="team-item">
-					<div class="team-image">
-						<img src="<?php echo base_url('public/images/demo/author-3.jpg') ?> " class="img-responsive" alt="author">
-					</div>
-					<div class="team-text">
-						<h3>Larry Parker</h3>
-						<div class="team-location">Barcelona, Spain</div>
-						<div class="team-position">– Development –</div>
-						<p>Aradan bes namet, cons uectetur moiscing adon elit. Aliquam vitae fringilla unda augue.</p>
-					</div>
-				</div>
-			</div>
-			<!-- end team member item -->
-			<!-- team member item -->
-			<div class="col-md-3">
-				<div class="team-item">
-					<div class="team-image">
-						<img src="<?php echo base_url('public/images/demo/author-4.jpg') ?> " class="img-responsive" alt="author">
-					</div>
-					<div class="team-text">
-						<h3>John BEKERS</h3>
-						<div class="team-location">Miami, Floria</div>
-						<div class="team-position">– Marketing –</div>
-						<p>Dolor sit don namet, cons uectetur beriscing adon elit. Aliquam vitae fringilla unda.</p>
-					</div>
-				</div>
-			</div>
-			<!-- end team member item -->
+			<!-- end team member item -->			
 		</div>
 	</div>
 </section>
@@ -433,3 +362,4 @@
 <p id="back-top">
 	<a href="#top"><i class="fa fa-angle-up"></i></a>
 </p>
+

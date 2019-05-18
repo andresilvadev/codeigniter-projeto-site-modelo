@@ -169,8 +169,7 @@ $(function() {
 						}
 					})
 				}
-			});
-			
+			});			
 		});
 	}
 	
@@ -208,7 +207,39 @@ $(function() {
 					$("#modal_member").modal();
 				}
 			});
-		})
+		});
+
+		$(".btn-del-member").click(function(){
+			member_id = $(this);
+
+			console.log(member_id.attr("member_id"));
+			
+			// Chama o sweet alert
+			Swal.fire({
+				title: "Atenção!",
+				text: "Deseja deletar esse membro?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d9534f",
+				confirmButtonText: "Sim",
+				cancelButtontext: "Não",
+				closeOnConfirm: true,
+				closeOnCancel: true,
+			}).then((result) => {
+				if(result.value) {
+					$.ajax({
+						type: "POST",
+						url: BASE_URL + "restrict/ajax_delete_member_data",
+						dataType: "json",
+						data: {"member_id": member_id.attr("member_id")},
+						success: function(response) {
+							Swal.fire("Sucesso!", "Ação executada com sucesso", "success");
+							dt_member.ajax.reload();
+						}
+					})
+				}
+			});			
+		});
 	}
 
 	var dt_member = $("#dt_team").DataTable({

@@ -34,7 +34,7 @@ class Team_model extends CI_Model
 	public function delete($id)
 	{
 		$this->db->where("member_id", $id);
-		$this->db->delete("team", $id);
+		$this->db->delete("team");		
 	}
 
 	var $column_search = array("member_name", "member_description");
